@@ -47,12 +47,17 @@ class Post
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $PostType;
+    private $postType;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $PostTypeContent;
+    private $postTypeHeaderContent;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPromoted = false;
 
     public function getId(): ?int
     {
@@ -109,24 +114,36 @@ class Post
 
     public function getPostType(): ?string
     {
-        return $this->PostType;
+        return $this->postType;
     }
 
-    public function setPostType(string $PostType): self
+    public function setPostType(string $postType): self
     {
-        $this->PostType = $PostType;
+        $this->postType = $postType;
 
         return $this;
     }
 
-    public function getPostTypeContent(): ?string
+    public function getPostTypeHeaderContent(): ?string
     {
-        return $this->PostTypeContent;
+        return $this->postTypeHeaderContent;
     }
 
-    public function setPostTypeContent(string $PostTypeContent): self
+    public function setPostTypeHeaderContent(string $postTypeHeaderContent): self
     {
-        $this->PostTypeContent = $PostTypeContent;
+        $this->postTypeHeaderContent = $postTypeHeaderContent;
+
+        return $this;
+    }
+
+    public function getIsPromoted(): ?bool
+    {
+        return $this->isPromoted;
+    }
+
+    public function setIsPromoted(bool $isPromoted): self
+    {
+        $this->isPromoted = $isPromoted;
 
         return $this;
     }
