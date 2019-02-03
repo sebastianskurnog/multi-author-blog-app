@@ -3,15 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
+ * User entity
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
+    /** Timestampable trait */
+    use TimestampableEntity;
+
     /**
-     * User entity
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
