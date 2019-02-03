@@ -47,6 +47,12 @@ class User
      */
     private $agreeTermsAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Profile", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profile;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +114,18 @@ class User
     public function setAgreeTermsAt(\DateTimeInterface $agreeTermsAt): self
     {
         $this->agreeTermsAt = $agreeTermsAt;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): self
+    {
+        $this->profile = $profile;
 
         return $this;
     }

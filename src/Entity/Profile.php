@@ -56,6 +56,11 @@ class Profile
      */
     private $slackAccount;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="profile", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +158,23 @@ class Profile
     public function setSlackAccount(string $slackAccount): self
     {
         $this->slackAccount = $slackAccount;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $user->getProfile()) {
+            $user->setProfile($this);
+        }
 
         return $this;
     }
