@@ -8,13 +8,11 @@
     <section class="s-featured">
         <div class="row">
             <div class="col-full">
-
                 <div class="featured-slider featured" data-aos="zoom-in">
-
                     {% for post in promotedPosts %}
                     <div class="featured__slide">
                         <div class="entry">
-
+                        jest
                             <div class="entry__background" style="background-image:url('{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}');"></div>
 
                             <div class="entry__content">
@@ -36,11 +34,8 @@
                         </div> <!-- end entry -->
                     </div> <!-- end featured__slide -->
                     {% endfor %}
-
-
-
-
                 </div> <!-- end featured -->
+                {% endif %}
 
             </div> <!-- end col-full -->
         </div>

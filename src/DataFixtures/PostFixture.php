@@ -20,6 +20,8 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
         'beetle-800.jpg'
     ];
 
+    public static $numberOfPromotedPosts = 3;
+
     protected function loadData(ObjectManager $manager)
     {
         $this->createMany(50, 'posts', function () use ($manager) {
@@ -32,7 +34,6 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
                 ->setUser($this->getRandomReference('users'))
                 ->setCategory($this->getRandomReference('categories'))
                 ->addTag($this->getRandomReference('tags'))
-                ->setIsPromoted($this->faker->boolean(5))
                 ->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'))
                 ->setIsActive($this->faker->boolean(80))
                 ;
@@ -43,8 +44,30 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
 
         });
 
+
         $manager->flush();
 
+        $this->promotePosts($manager);
+    }
+
+    /**
+     * Promote random posts (promoted posts are displayed in feature section on homepage
+     *
+     * @param ObjectManager $manager
+     * @throws \Exception
+     */
+    protected function promotePosts(ObjectManager $manager): void
+    {
+        for($i = 0; $i < self::$numberOfPromotedPosts; $i++) {
+            /** @var Post $post */
+            $post = $this->getRandomReference('posts', true);
+            $post->setIsPromoted(true)
+                ->setIsActive(true);
+
+            $manager->persist($post);
+        }
+
+        $manager->flush();
     }
 
     public function getDependencies()

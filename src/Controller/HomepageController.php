@@ -19,9 +19,10 @@ class HomepageController extends AbstractController
      */
     public function index(PostRepository $postRepository)
     {
-
+        // get all published & promoted posts
         $promotedPosts = $postRepository->findAllPublishedAndPromoted();
 
+        // get all published posts
         $posts = $postRepository->findAllPublishedOrderedByNewest();
 
         return $this->render('homepage/index.html.twig', [
