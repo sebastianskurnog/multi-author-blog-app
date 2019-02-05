@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,55 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    // /**
-    //  * @return Post[] Returns an array of Post objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Post
+    /**
+     * Helper method -> return query builder with default isActive = true
+     *
+     * @param QueryBuilder|null $queryBuilder
+     * @return QueryBuilder
+     */
+    private function addIsPublishedQueryBuilder(QueryBuilder $queryBuilder = null)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->getOrCreateQueryBuilder($queryBuilder)
+//            ->leftJoin('p.category', 'c')
+//            ->addSelect('c')
+            ->andWhere('p.isActive = :val')
+            ->setParameter('val', true);
     }
-    */
+
+
+    /**
+     * Helper method -> create new or return existing query builder object
+     *
+     * @param QueryBuilder|null $queryBuilder
+     * @return QueryBuilder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder)
+    {
+        return $queryBuilder ?: $this->createQueryBuilder('p');
+    }
+
+    /**
+     * Get all published posts ordered by newest
+     */
+    public function findAllPublishedOrderedByNewest()
+    {
+        return $this->addIsPublishedQueryBuilder()
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Get all published * promoted posts
+     */
+    public function findAllPublishedAndPromoted()
+    {
+        return $this->addIsPublishedQueryBuilder()
+            ->andWhere('p.isPromoted = :val')
+            ->setParameter('val', true)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

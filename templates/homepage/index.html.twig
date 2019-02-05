@@ -11,83 +11,34 @@
 
                 <div class="featured-slider featured" data-aos="zoom-in">
 
+                    {% for post in promotedPosts %}
                     <div class="featured__slide">
                         <div class="entry">
 
-                            <div class="entry__background" style="background-image:url('{{ asset('images/thumbs/featured/featured-guitarman.jpg') }}');"></div>
+                            <div class="entry__background" style="background-image:url('{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}');"></div>
 
                             <div class="entry__content">
-                                <span class="entry__category"><a href="#0">Music</a></span>
+                                <span class="entry__category"><a href="#0">{{ post.category.name }}</a></span>
 
-                                <h1><a href="#0" title="">What Your Music Preference Says About You and Your Personality.</a></h1>
+                                <h1><a href="#0" title="">{{ post.title }}</a></h1>
 
                                 <div class="entry__info">
                                     <a href="#0" class="entry__profile-pic">
-                                        <img class="avatar" src="{{ asset('images/avatars/user-05.jpg') }}" alt="">
+                                        <img class="avatar" src="{{ asset('images/avatars/') }}{{ post.user.profile.avatarImageFileName }}" alt="">
                                     </a>
                                     <ul class="entry__meta">
-                                        <li><a href="#0">Jonathan Smith</a></li>
-                                        <li>June 02, 2018</li>
+                                        <li><a href="#0">{{ post.user.username }}</a></li>
+                                        <li>{{ post.createdAt|date("m/d/Y") }}</li>
                                     </ul>
                                 </div>
                             </div> <!-- end entry__content -->
 
                         </div> <!-- end entry -->
                     </div> <!-- end featured__slide -->
+                    {% endfor %}
 
-                    <div class="featured__slide">
 
-                        <div class="entry">
 
-                            <div class="entry__background" style="background-image:url({{ asset('images/thumbs/featured/featured-watch.jpg') }});"></div>
-
-                            <div class="entry__content">
-                                <span class="entry__category"><a href="#0">Management</a></span>
-
-                                <h1><a href="#0" title="">The Pomodoro Technique Really Works.</a></h1>
-
-                                <div class="entry__info">
-                                    <a href="#0" class="entry__profile-pic">
-                                        <img class="avatar" src="{{ asset('images/avatars/user-03.jpg') }}" alt="">
-                                    </a>
-
-                                    <ul class="entry__meta">
-                                        <li><a href="#0">John Doe</a></li>
-                                        <li>June 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div> <!-- end entry__content -->
-
-                        </div> <!-- end entry -->
-
-                    </div> <!-- end featured__slide -->
-
-                    <div class="featured__slide">
-
-                        <div class="entry">
-
-                            <div class="entry__background" style="background-image:url({{ asset('images/thumbs/featured/featured-beetle.jpg') }});"></div>
-
-                            <div class="entry__content">
-                                <span class="entry__category"><a href="#0">LifeStyle</a></span>
-
-                                <h1><a href="#0" title="">The difference between Classics, Vintage & Antique Cars.</a></h1>
-
-                                <div class="entry__info">
-                                    <a href="#0" class="entry__profile-pic">
-                                        <img class="avatar" src="{{ asset('images/avatars/user-03.jpg') }}" alt="">
-                                    </a>
-
-                                    <ul class="entry__meta">
-                                        <li><a href="#0">John Doe</a></li>
-                                        <li>June 12, 2018</li>
-                                    </ul>
-                                </div>
-                            </div> <!-- end entry__content -->
-
-                        </div> <!-- end entry -->
-
-                    </div> <!-- end featured__slide -->
 
                 </div> <!-- end featured -->
 
@@ -103,305 +54,32 @@
         <div class="row entries-wrap wide">
             <div class="entries">
 
+                {% for post in posts %}
                 <article class="col-block">
-
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
                             <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/lamp-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/lamp-400.jpg') }} 1x, {{ asset('images/thumbs/post/lamp-800.jpg') }} 2x" alt="">
+                                <img src="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}"
+                                     srcset="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 1x, {{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 2x" alt="">
                             </a>
                         </div>
 
                         <div class="item-entry__text">
                             <div class="item-entry__cat">
-                                <a href="#">Design</a>
+                                <a href="#">{{ post.category.name }}</a>
                             </div>
 
-                            <h1 class="item-entry__title"><a href="#">3 Benefits of Minimalism In Interior Design.</a></h1>
+                            <h1 class="item-entry__title"><a href="#">{{ post.title }}</a></h1>
 
                             <div class="item-entry__date">
-                                <a href="#">June 15, 2018</a>
+                                <a href="#">{{ post.createdAt|date("m/d/Y") }}</a>
                             </div>
                         </div>
                     </div> <!-- item-entry -->
 
                 </article> <!-- end article -->
+                {% endfor %}
 
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
-
-                <article class="col-block">
-
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <a href="#" class="item-entry__thumb-link">
-                                <img src="{{ asset('images/thumbs/post/tulips-400.jpg') }}"
-                                     srcset="{{ asset('images/thumbs/post/tulips-400.jpg') }} 1x, {{ asset('images/thumbs/post/tulips-800.jpg') }} 2x" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="#">Health</a>
-                            </div>
-
-                            <h1 class="item-entry__title"><a href="#">10 Interesting Facts About Caffeine.</a></h1>
-
-                            <div class="item-entry__date">
-                                <a href="#">June 14, 2018</a>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-
-                </article> <!-- end article -->
 
             </div> <!-- end entries -->
         </div> <!-- end entries-wrap -->

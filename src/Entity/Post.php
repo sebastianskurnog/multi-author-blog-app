@@ -74,9 +74,14 @@ class Post
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="posts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="posts", fetch="EXTRA_LAZY")
      */
     private $tags;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive = false;
 
     public function __construct()
     {
@@ -220,6 +225,18 @@ class Post
             $this->tags->removeElement($tag);
             $tag->removePost($this);
         }
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

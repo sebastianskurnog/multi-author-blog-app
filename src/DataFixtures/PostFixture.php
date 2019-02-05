@@ -32,6 +32,9 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
                 ->setUser($this->getRandomReference('users'))
                 ->setCategory($this->getRandomReference('categories'))
                 ->addTag($this->getRandomReference('tags'))
+                ->setIsPromoted($this->faker->boolean(5))
+                ->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'))
+                ->setIsActive($this->faker->boolean(80))
                 ;
 
             $manager->persist($post);

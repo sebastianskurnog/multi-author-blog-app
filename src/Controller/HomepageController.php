@@ -2,19 +2,31 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
+
     /**
+     * Home page action -> get & display published posts (promoted & all)
+     *
      * @Route("/", name="homepage")
+     *
+     * @param PostRepository $postRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(PostRepository $postRepository)
     {
+
+        $promotedPosts = $postRepository->findAllPublishedAndPromoted();
+
+        $posts = $postRepository->findAllPublishedOrderedByNewest();
+
         return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
+            'promotedPosts' => $promotedPosts,
+            'posts' => $posts
         ]);
     }
 }
