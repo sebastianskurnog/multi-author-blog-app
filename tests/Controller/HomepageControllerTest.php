@@ -76,13 +76,46 @@ class HomepageControllerTest extends WebTestCase
 
     }
 
+
+    /**
+     * Test run with empty database and checks if there is no posts on homepage & message about it are shown
+     */
+    public function testSpecialMessageAreShownWhenThereIsNoActivePosts()
+    {
+        // purge database
+        $this->purgeDatabase();
+
+        $client = $this->makeClient();
+        $crawler = $client->request('GET', '/');
+
+        // check status code
+        $this->assertStatusCode(200, $client);
+
+        // check if promoted posts count is equal to posts viewed on homepage
+        $this->assertCount(0, $crawler->filter('.featured__slide'));
+
+        // check if count posts is equal to posts viewed on homepage
+        $this->assertCount(0, $crawler->filter('.item-entry'));
+
+        // check if there is a special message on homepage
+        $this->assertContains('Blog don\'t have any active posts', $client->getResponse()->getContent());
+
+    }
+
+
     /**
      * Delete all data from database
      */
-    public function tearDown()
+    private function purgeDatabase()
     {
         $purger = new ORMPurger($this->getEntityManager());
         $purger->purge();
+    }
+
+
+    public function tearDown()
+    {
+        $this->purgeDatabase();
     }
 
 }

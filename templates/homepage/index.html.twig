@@ -8,6 +8,7 @@
     <section class="s-featured">
         <div class="row">
             <div class="col-full">
+                {% if promotedPosts|length > 0 %}
                 <div class="featured-slider featured" data-aos="zoom-in">
                     {% for post in promotedPosts %}
                     <div class="featured__slide">
@@ -37,6 +38,8 @@
                 </div> <!-- end featured -->
                 {% endif %}
 
+
+
             </div> <!-- end col-full -->
         </div>
     </section> <!-- end s-featured -->
@@ -48,7 +51,7 @@
 
         <div class="row entries-wrap wide">
             <div class="entries">
-
+            {% if posts|length > 0 %}
                 {% for post in posts %}
                 <article class="col-block">
                     <div class="item-entry" data-aos="zoom-in">
@@ -74,7 +77,9 @@
 
                 </article> <!-- end article -->
                 {% endfor %}
-
+            {% else %}
+                <span class="no-posts">Blog don't have any active posts</span>
+            {% endif %}
 
             </div> <!-- end entries -->
         </div> <!-- end entries-wrap -->
