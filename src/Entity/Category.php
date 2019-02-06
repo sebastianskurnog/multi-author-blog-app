@@ -85,4 +85,14 @@ class Category
 
         return $this;
     }
+
+    /**
+     * Count all posts in category
+     *
+     * @return int
+     */
+    public function getPostsCount(): int
+    {
+        return $this->getPosts()->count();
+    }
 }

@@ -1,5 +1,5 @@
 <ul class="sub-menu">
     {% for category in categoriesList %}
-    <li><a href="#">{{ category.name }}</a></li>
+    <li><a href="#">{{ category.name }} ({{ category.postsCount }})</a></li>
     {% endfor %}
 </ul>
