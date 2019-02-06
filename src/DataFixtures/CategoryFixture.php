@@ -12,7 +12,8 @@ class CategoryFixture extends BaseFixture
         $this->createMany(5, 'categories', function() use ($manager) {
 
             $category = new Category();
-            $category->setName($this->faker->domainWord);
+            $category->setName($this->faker->domainWord)
+                ->setDescription($this->faker->paragraph);
 
             $manager->persist($category);
 
