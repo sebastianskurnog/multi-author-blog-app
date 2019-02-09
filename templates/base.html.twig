@@ -52,7 +52,7 @@
 <header class="s-header header">
 
     <div class="header__logo">
-        <a class="logo" href="index.html">
+        <a class="logo" href="{{ path('homepage') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Homepage">
         </a>
     </div> <!-- end header__logo -->
@@ -78,7 +78,7 @@
         <h2 class="header__nav-heading h6">Navigate to</h2>
 
         <ul class="header__nav">
-            <li class="current"><a href="#" title="">Home</a></li>
+            <li class="current"><a href="{{ path('homepage') }}" title="">Home</a></li>
             <li class="has-children">
                 <a href="#0" title="">Categories</a>
                 {{ render(controller(

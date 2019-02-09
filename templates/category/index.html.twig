@@ -1,20 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Multi user blog | homepage{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<!-- s-content
+================================================== -->
+<section class="s-content s-content--top-padding">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row narrow">
+        <div class="col-full s-content__header" data-aos="fade-up">
+            <h1 class="display-1 display-1--with-line-sep">Category: {{ category.name }} ({{ category.postsCount }})</h1>
+            <p class="lead">{{ category.description }}</p>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/CategoryController.php'|file_link(0) }}">src/Controller/CategoryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/category/index.html.twig'|file_link(0) }}">templates/category/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="row entries-wrap add-top-padding wide">
+        <div class="entries">
+            {% if category.posts|length > 0 %}
+                {% for post in category.posts %}
+                    <article class="col-block">
+                        <div class="item-entry" data-aos="zoom-in">
+                            <div class="item-entry__thumb">
+                                <a href="#" class="item-entry__thumb-link">
+                                    <img src="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}"
+                                         srcset="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 1x, {{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 2x" alt="">
+                                </a>
+                            </div>
+
+                            <div class="item-entry__text">
+                                <div class="item-entry__cat">
+                                    <a href="#">{{ post.category.name }}</a>
+                                </div>
+
+                                <h1 class="item-entry__title"><a href="#">{{ post.title }}</a></h1>
+
+                                <div class="item-entry__date">
+                                    <a href="#">{{ post.createdAt|date("m/d/Y") }}</a>
+                                </div>
+                            </div>
+                        </div> <!-- item-entry -->
+
+                    </article> <!-- end article -->
+                {% endfor %}
+            {% else %}
+                <span class="no-posts">Category don't have any active posts</span>
+            {% endif %}
+
+        </div> <!-- end entries -->
+    </div> <!-- end entries-wrap -->
+
+    <div class="row pagination-wrap">
+        <div class="col-full">
+            <nav class="pgn" data-aos="fade-up">
+                <ul>
+                    <li><a class="pgn__prev" href="#0">Prev</a></li>
+                    <li><a class="pgn__num" href="#0">1</a></li>
+                    <li><span class="pgn__num current">2</span></li>
+                    <li><a class="pgn__num" href="#0">3</a></li>
+                    <li><a class="pgn__num" href="#0">4</a></li>
+                    <li><a class="pgn__num" href="#0">5</a></li>
+                    <li><span class="pgn__num dots">…</span></li>
+                    <li><a class="pgn__num" href="#0">8</a></li>
+                    <li><a class="pgn__next" href="#0">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</section> <!-- end s-content -->
 {% endblock %}
