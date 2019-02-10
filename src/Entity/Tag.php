@@ -99,4 +99,9 @@ class Tag
 
         return $this;
     }
+
+    public function getPostsCount(): int
+    {
+        return $this->getPosts()->count();
+    }
 }

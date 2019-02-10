@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Multi user blog | homepage{% endblock %}
+
+{% block body %}
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--top-padding">
+
+        <div class="row narrow">
+            <div class="col-full s-content__header" data-aos="fade-up">
+                <h1 class="display-1 display-1--with-line-sep">#Tags</h1>
+                <p class="lead">
+                 {% if tags|length > 0 %}
+                     <span class="entry__tax-list entry__tax-list--pill">
+                     {% for tag in tags %}
+                            <a href="#">{{ tag.name }} ({{ tag.postsCount }})</a>
+                     {% endfor %}
+                        </span>
+                 {% endif %}
+                </p>
+            </div>
+        </div>
+    </section> <!-- end s-content -->
+{% endblock %}
