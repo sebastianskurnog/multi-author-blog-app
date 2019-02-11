@@ -14,7 +14,7 @@
                  {% if tags|length > 0 %}
                      <span class="entry__tax-list entry__tax-list--pill">
                      {% for tag in tags %}
-                            <a href="#">{{ tag.name }} ({{ tag.postsCount }})</a>
+                            <a href="{{ path('tag', {'slug': tag.slug}) }}">{{ tag.name }} ({{ tag.postsCount }})</a>
                      {% endfor %}
                         </span>
                  {% endif %}

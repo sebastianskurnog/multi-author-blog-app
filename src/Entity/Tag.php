@@ -36,7 +36,7 @@ class Tag
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Post", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="tags")
      */
     private $posts;
 
@@ -86,6 +86,7 @@ class Tag
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
+            $post->addTag($this);
         }
 
         return $this;
@@ -95,6 +96,7 @@ class Tag
     {
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
+            $post->removeTag($this);
         }
 
         return $this;

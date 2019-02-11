@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Multi user blog | homepage{% endblock %}
+{% block title %}Multi user blog{% endblock %}
 
 {% block body %}
 <!-- s-content
@@ -28,14 +28,13 @@
                             </div>
 
                             <div class="item-entry__text">
-                                <div class="item-entry__cat">
-                                    <a href="#">{{ post.category.name }}</a>
-                                </div>
+
 
                                 <h1 class="item-entry__title"><a href="#">{{ post.title }}</a></h1>
 
                                 <div class="item-entry__date">
-                                    <a href="#">{{ post.createdAt|date("m/d/Y") }}</a>
+                                    <a href="#">{{ post.createdAt|date("m/d/Y") }}</a><br>
+                                    <small>{{ post.user.username }}</small>
                                 </div>
                             </div>
                         </div> <!-- item-entry -->

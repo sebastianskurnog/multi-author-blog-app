@@ -13,7 +13,7 @@ class CategoryController extends AbstractController
      * @Route("/category/{slug}", name="category")
      *
      */
-    public function index(Category $category)
+    public function show(Category $category)
     {
 
         return $this->render('category/index.html.twig', [

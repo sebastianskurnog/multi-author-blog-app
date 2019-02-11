@@ -35,20 +35,24 @@ class Category
      */
     private $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="category")
-     */
-    private $posts;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="categories")
+     */
+    private $posts;
+
+
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -83,6 +87,22 @@ class Category
         $this->slug = $slug;
     }
 
+
+
+
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Post[]
      */
@@ -95,7 +115,7 @@ class Category
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
-            $post->setCategory($this);
+            $post->addCategory($this);
         }
 
         return $this;
@@ -105,34 +125,16 @@ class Category
     {
         if ($this->posts->contains($post)) {
             $this->posts->removeElement($post);
-            // set the owning side to null (unless already changed)
-            if ($post->getCategory() === $this) {
-                $post->setCategory(null);
-            }
+            $post->removeCategory($this);
         }
 
         return $this;
     }
 
-    /**
-     * Count all posts in category
-     *
-     * @return int
-     */
-    public function getPostsCount(): int
-    {
-        return $this->getPosts()->count();
-    }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
 
-    public function setDescription(?string $description): self
+    public function postsCount(): int
     {
-        $this->description = $description;
-
-        return $this;
+        return $this->posts->count();
     }
 }

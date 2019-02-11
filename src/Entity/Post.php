@@ -67,25 +67,27 @@ class Post
      */
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="posts", fetch="EXTRA_LAZY")
-     */
-    private $tags;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $isActive = false;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="posts")
+     */
+    private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="posts")
+     */
+    private $tags;
+
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,14 +191,43 @@ class Post
         return $this;
     }
 
-    public function getCategory(): ?Category
+
+
+
+    public function getIsActive(): ?bool
     {
-        return $this->category;
+        return $this->isActive;
     }
 
-    public function setCategory(?Category $category): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->category = $category;
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
 
         return $this;
     }
@@ -213,7 +244,6 @@ class Post
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->addPost($this);
         }
 
         return $this;
@@ -223,21 +253,10 @@ class Post
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
-            $tag->removePost($this);
         }
 
         return $this;
     }
 
-    public function getIsActive(): ?bool
-    {
-        return $this->isActive;
-    }
 
-    public function setIsActive(bool $isActive): self
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
 }

@@ -17,7 +17,7 @@
                             <div class="entry__background" style="background-image:url('{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}');"></div>
 
                             <div class="entry__content">
-                                <span class="entry__category"><a href="{{ path('category', {'slug': post.category.slug}) }}">{{ post.category.name }}</a></span>
+
 
                                 <h1><a href="#0" title="">{{ post.title }}</a></h1>
 
@@ -63,14 +63,14 @@
                         </div>
 
                         <div class="item-entry__text">
-                            <div class="item-entry__cat">
-                                <a href="{{ path('category', {'slug': post.category.slug}) }}">{{ post.category.name }}</a>
-                            </div>
+
 
                             <h1 class="item-entry__title"><a href="#">{{ post.title }}</a></h1>
 
                             <div class="item-entry__date">
-                                <a href="#">{{ post.createdAt|date("m/d/Y") }}</a>
+                                <a href="#">{{ post.createdAt|date("m/d/Y") }}</a><br>
+                                <small>{{ post.user.username }}</small>
+
                             </div>
                         </div>
                     </div> <!-- item-entry -->

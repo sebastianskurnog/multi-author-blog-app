@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Multi user blog | #{{ tag.name }}{% endblock %}
+
+{% block body %}
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--top-padding">
+
+        <div class="row narrow">
+            <div class="col-full s-content__header" data-aos="fade-up">
+                <h1 class="display-1 display-1--with-line-sep">#{{ tag.name }} ({{ tag.postsCount }})</h1>
+            </div>
+        </div>
+
+        <div class="row entries-wrap add-top-padding wide">
+            <div class="entries">
+                {% if tag.posts|length > 0 %}
+                    {% for post in tag.posts %}
+                        <article class="col-block">
+                            <div class="item-entry" data-aos="zoom-in">
+                                <div class="item-entry__thumb">
+                                    <a href="#" class="item-entry__thumb-link">
+                                        <img src="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }}"
+                                             srcset="{{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 1x, {{ asset('images/thumbs/post/') }}{{ post.mainImageFilename }} 2x" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="item-entry__text">
+
+
+                                    <h1 class="item-entry__title"><a href="#">{{ post.title }}</a></h1>
+
+                                    <div class="item-entry__date">
+                                        <a href="#">{{ post.createdAt|date("m/d/Y") }}</a>
+                                    </div>
+                                </div>
+                            </div> <!-- item-entry -->
+
+                        </article> <!-- end article -->
+                    {% endfor %}
+                {% else %}
+                    <span class="no-posts">Tag don't have any active posts</span>
+                {% endif %}
+
+            </div> <!-- end entries -->
+        </div> <!-- end entries-wrap -->
+
+        <div class="row pagination-wrap">
+            <div class="col-full">
+                <nav class="pgn" data-aos="fade-up">
+                    <ul>
+                        <li><a class="pgn__prev" href="#0">Prev</a></li>
+                        <li><a class="pgn__num" href="#0">1</a></li>
+                        <li><span class="pgn__num current">2</span></li>
+                        <li><a class="pgn__num" href="#0">3</a></li>
+                        <li><a class="pgn__num" href="#0">4</a></li>
+                        <li><a class="pgn__num" href="#0">5</a></li>
+                        <li><span class="pgn__num dots">…</span></li>
+                        <li><a class="pgn__num" href="#0">8</a></li>
+                        <li><a class="pgn__next" href="#0">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </section> <!-- end s-content -->
+{% endblock %}

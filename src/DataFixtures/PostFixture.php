@@ -32,7 +32,7 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
                 ->setMainImageFilename($this->faker->randomElement(self::$postImageThumbs))
                 ->setPostType('standard')
                 ->setUser($this->getRandomReference('users'))
-                ->setCategory($this->getRandomReference('categories'))
+                ->addCategory($this->getRandomReference('categories'))
                 ->addTag($this->getRandomReference('tags'))
                 ->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'))
                 ->setIsActive($this->faker->boolean(80))
