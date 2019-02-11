@@ -28,15 +28,23 @@ class PostFixture extends BaseFixture implements DependentFixtureInterface
 
             $post = new Post();
             $post->setTitle($this->faker->sentence)
-                ->setBody($this->faker->paragraph)
+                ->setBody($this->faker->paragraphs(15, true))
                 ->setMainImageFilename($this->faker->randomElement(self::$postImageThumbs))
                 ->setPostType('standard')
                 ->setUser($this->getRandomReference('users'))
-                ->addCategory($this->getRandomReference('categories'))
-                ->addTag($this->getRandomReference('tags'))
                 ->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'))
                 ->setIsActive($this->faker->boolean(80))
                 ;
+
+                $randomNumber = rand(1, 4);
+
+                for($ii = 0; $ii < $randomNumber; $ii++) {
+                    $post->addCategory($this->getRandomReference('categories'))
+                        ->addTag($this->getRandomReference('tags'));
+                }
+
+
+
 
             $manager->persist($post);
 
